@@ -1,12 +1,26 @@
+import { useState } from "react";
 import "./styles.css"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function App() {
-  return <>
-  <form className="new-item-form">
+  const [newItem, setNewItem] = useState("Test");
+  const [todos, setTodos] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  return (
+  <>
+  <form onSubmit={handleSubmit} className="new-item-form">
     <div className="form-row">
       <label htmlFor="item">New Item</label>
-      <input type="text" id="item" /> 
+      <input 
+        value={newItem} 
+        type="text" 
+        id="item"
+        onChange={e => setNewItem(e.target.value)}
+      /> 
     </div>
     <button className="btn">Add</button>
   </form>
@@ -21,4 +35,5 @@ export default function App() {
     </li>
   </ul>
   </>
+  )
 }
